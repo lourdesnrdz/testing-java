@@ -2,18 +2,14 @@ import static org.junit.Assert.*;
 
 public class StringUtilTest {
     public static void main(String[] args) {
-        String result1  = StringUtil.repeat("hola", 3);
-        System.out.println(result1);
+        assertEquals(StringUtil.repeat("hola", 3), "holaholahola");
 
-        if (!result1.equals("holaholahola")){
-            System.out.println("OK");
-        }
+        assertEquals(StringUtil.repeat("hola", 1), "hola");
+    }
 
-        String result2  = StringUtil.repeat("hola", 1);
-        System.out.println(result2);
-
-        if (!result2.equals("hola")){
-            System.out.println("ERROR");
+    private static void assertEquals(String actual, String expected){
+        if (!actual.equals(expected)){
+            throw new RuntimeException(actual + " is not equal to " + expected);
         }
     }
 }
