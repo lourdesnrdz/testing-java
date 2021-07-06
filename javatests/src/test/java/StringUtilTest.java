@@ -1,4 +1,5 @@
 import org.junit.Test;
+import util.StringUtil;
 
 import static org.junit.Assert.*;
 

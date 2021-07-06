@@ -1,3 +1,5 @@
+package util;
+
 public class StringUtilChallenge {
 
     public static boolean isEmpty(String str) {

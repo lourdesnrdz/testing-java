@@ -1,3 +1,5 @@
+package util;
+
 public class StringUtil {
     public static String repeat(String str, int times){
 
