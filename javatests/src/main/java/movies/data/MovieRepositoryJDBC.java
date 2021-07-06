@@ -2,6 +2,7 @@ package movies.data;
 
 import movies.model.Movie;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import movies.model.Genre;
@@ -32,7 +33,22 @@ public class MovieRepositoryJDBC implements MovieRepository {
 
     @Override
     public void saveOrUpdate(Movie movie) {
+        jdbcTemplate.update("INSERT INTO movies (name, minutes, genre) VALUES (?, ?, ?)",
+                movie.getName(), movie.getMinutes(), movie.getGenre().toString());
+    }
 
+    public Collection<Movie> findByName(String name) {
+        Collection<Movie> allMovies = jdbcTemplate.query("select * from movies", movieMapper);
+
+        Collection<Movie> moviesFound = new ArrayList<>();
+
+        for(Movie movie : allMovies) {
+            if(movie.getName().toLowerCase().contains(name.toLowerCase())) {
+                moviesFound.add(movie);
+            }
+        }
+
+        return moviesFound;
     }
 
     private static RowMapper<Movie> movieMapper = (rs, rowNum) ->

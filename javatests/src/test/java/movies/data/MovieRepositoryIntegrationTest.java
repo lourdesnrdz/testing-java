@@ -57,6 +57,33 @@ public class MovieRepositoryIntegrationTest {
 
     }
 
+    @Test
+    public void insert_a_movie() {
+        Movie movie = new Movie("Super 8", 112, Genre.THRILLER);
+
+        movieRepository.saveOrUpdate(movie);
+
+        Movie movieFromDb = movieRepository.findById(4);
+
+        assertThat( movieFromDb, is(new Movie(4, "Super 8", 112, Genre.THRILLER)) );
+    }
+
+    @Test
+    public void loadMoviesByName() {
+        // 1. Insert Movie into DB
+        Collection<Movie> moviesAdded = Arrays.asList(
+                new Movie(4, "Super 8", 112, Genre.THRILLER),
+                new Movie(5, "Superman", 95, Genre.ACTION),
+                new Movie(6, "Superior", 123, Genre.COMEDY)
+        );
+
+        moviesAdded.stream().forEach(movie -> movieRepository.saveOrUpdate(movie));
+
+        // 2. Find movie by name
+        Collection<Movie> moviesFound = movieRepository.findByName("Super");
+        assertThat(moviesFound, is(moviesAdded));
+    }
+
     @After
     public void tearDown() throws Exception {
         // Remove H2 files -- https://stackoverflow.com/a/51809831/1121497
