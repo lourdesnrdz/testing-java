@@ -26,8 +26,6 @@ On this course I used the following development technologies:
  - Github
  - IntelliJ IDEA 2021 1.2
  - OpenJDK 11
- - XAMPP
- - Postman
 
 ## Setup
 
